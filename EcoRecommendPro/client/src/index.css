@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(142, 76%, 36%);
+  --primary-foreground: hsl(355, 100%, 97%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(142, 76%, 36%);
+  --radius: 0.5rem;
+  
+  /* Eco-friendly color palette */
+  --eco-50: hsl(151, 81%, 96%);
+  --eco-100: hsl(149, 80%, 90%);
+  --eco-200: hsl(152, 76%, 80%);
+  --eco-300: hsl(156, 72%, 67%);
+  --eco-400: hsl(158, 64%, 52%);
+  --eco-500: hsl(160, 84%, 39%);
+  --eco-600: hsl(161, 94%, 30%);
+  --eco-700: hsl(163, 94%, 24%);
+  --eco-800: hsl(166, 90%, 20%);
+  --eco-900: hsl(170, 97%, 15%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(142, 76%, 36%);
+  --primary-foreground: hsl(355, 100%, 97%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(142, 76%, 36%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  .eco-score-badge {
+    background: linear-gradient(135deg, #10B981 0%, #84CC16 100%);
+  }
+
+  .product-card {
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-glow:focus {
+    box-shadow: 0 0 0 3px hsl(var(--eco-500) / 0.1);
+  }
+}
+
+@layer utilities {
+  .bg-eco-50 { background-color: var(--eco-50); }
+  .bg-eco-100 { background-color: var(--eco-100); }
+  .bg-eco-200 { background-color: var(--eco-200); }
+  .bg-eco-300 { background-color: var(--eco-300); }
+  .bg-eco-400 { background-color: var(--eco-400); }
+  .bg-eco-500 { background-color: var(--eco-500); }
+  .bg-eco-600 { background-color: var(--eco-600); }
+  .bg-eco-700 { background-color: var(--eco-700); }
+  .bg-eco-800 { background-color: var(--eco-800); }
+  .bg-eco-900 { background-color: var(--eco-900); }
+  
+  .text-eco-50 { color: var(--eco-50); }
+  .text-eco-100 { color: var(--eco-100); }
+  .text-eco-200 { color: var(--eco-200); }
+  .text-eco-300 { color: var(--eco-300); }
+  .text-eco-400 { color: var(--eco-400); }
+  .text-eco-500 { color: var(--eco-500); }
+  .text-eco-600 { color: var(--eco-600); }
+  .text-eco-700 { color: var(--eco-700); }
+  .text-eco-800 { color: var(--eco-800); }
+  .text-eco-900 { color: var(--eco-900); }
+}

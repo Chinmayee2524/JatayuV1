@@ -1,0 +1,331 @@
+
+
+✅ ECO-FRIENDLY PRODUCT RECOMMENDATION SYSTEM – MVP SPEC FOR IMPLEMENTATION
+
+🔧 ADMIN FLOW
+Admin uploads the dataset (CSV or JSON format) via an upload UI or backend endpoint.
+
+
+The Hybrid Eco-Scoring Strategy is triggered:
+(if eco-score column in dataset is empty then only run this)
+
+
+Step 1: Score all 49,000 products using Mistral-7B.
+
+
+Step 2: Select the top 5,000 products based on the highest eco-scores.
+
+
+Step 3: Re-score these 5,000 using LLaMA-2 for higher precision.
+
+
+The final, scored dataset is stored in the PostgreSQL database.
+
+
+
+
+
+
+👤 USER FLOW
+1. User Onboarding
+Sign Up
+
+
+Fields: name, email, password, age, gender
+
+
+Stored in database on submission
+
+
+Log In
+
+
+Fields: email, password
+
+
+Authenticated via Flask-based login system
+
+
+2. Cold Start & Personalized Recommendation
+First-Time Homepage (Cold Start):
+
+
+Recommends products based on user's age and gender
+
+
+Returning User Homepage:
+
+
+Recommends products based on:
+
+
+Session activity: cart, wishlist, viewed log
+
+
+Profile data: age, gender
+
+
+3. User Activity Tracking
+When user clicks a product, it's added to the viewed log
+
+
+When user adds to cart/wishlist, it's stored in:
+
+
+PostgreSQL (persistent)
+
+
+Flask session storage (temporary)
+
+
+
+🔍 ✅ SEARCH FUNCTIONALITY
+A search bar on the homepage allows users to:
+
+
+Search by product title or keywords in the text (user reviews)
+
+
+Query is case-insensitive, supports partial keyword matches
+
+
+Backend uses SQL ILIKE or full-text search on title and text
+
+
+Results are filtered by user context:
+
+
+Cold-start: filter based on age/gender
+
+
+Personalized search (optional): rank based on cart/wishlist/view history
+
+
+
+🧠 WHAT THE SYSTEM DOES
+✅ User Onboarding
+
+
+/signup: stores user data in DB
+
+
+/login: authenticates and creates session
+
+"Use Flask session to store logged-in user's activity like viewed products, cart, and wishlist. This session should update live as the user interacts and guide product recommendations across the homepage and search. Also sync key actions to PostgreSQL so that users' activity is saved even after logout."
+
+
+🧊 Cold Start Solution
+
+
+Homepage recommendation based on age and gender
+
+
+🎯 Personalized Recommendation
+
+
+Based on wishlist, cart, viewed log, age, gender
+
+
+🛒 User Activity
+
+
+Track clicks → update viewed log
+
+
+Wishlist/cart updates in DB and session
+
+
+🔍 Search
+
+
+Search products by title or review text
+
+
+👤 User Profile
+
+
+User info displayed on homepage
+
+
+Includes: name, email, age, gender, and quick links to cart, wishlist, logout
+
+
+
+🧰 TECH STACK & WORKING
+Backend: Python (Flask)
+
+
+Flask sessions for auth and state
+
+
+Flask routes for onboarding, recommendation, search, cart/wishlist/view log
+
+
+Database: PostgreSQL
+
+
+Stores all user and product info, eco-scores, activity logs
+
+
+Full-text or ILIKE search enabled on products
+
+
+Frontend: React.js
+
+
+Responsive homepage UI
+
+
+Search bar
+
+
+Product recommendation grid
+
+
+Product cards with CTA buttons
+
+
+User Profile Section at top-right or sidebar
+
+
+
+🖼️ FRONTEND DISPLAY REQUIREMENTS
+Each product card on homepage displays:
+Product Title
+
+
+Eco Score (highlighted)
+
+
+User Reviews snippet
+
+
+Optional: category, price, image
+
+
+Buttons:
+
+
+"Add to Cart" → updates session & DB
+
+
+"Add to Wishlist" → updates session & DB
+
+
+🔍 Search Bar:
+Positioned prominently at top
+
+
+Filters products live or on submit
+
+
+👤 User Profile Section:
+Visible on homepage after login (top bar or sidebar)
+
+
+Displays:
+
+
+Name, Email, Age, Gender
+
+
+"My Cart", "My Wishlist", "Logout" links
+
+
+Optional: Avatar or initials
+
+
+
+📦 EXPECTED INPUTS & OUTPUTS
+Input Dataset Columns:
+
+
+title, text, eco_score, age_target, gender_target, category, product_id
+
+
+User Table Fields:
+
+
+id, name, email, password, age, gender
+
+
+Session Logs:
+
+
+user_id, viewed_products, cart_items, wishlist_items
+
+
+Outputs:
+
+
+Homepage with personalized + search-based product feeds
+
+
+User profile details rendered on homepage
+
+
+
+✅ NEXT STEPS FOR REPLIT IMPLEMENTATION
+Build Admin UI for dataset upload
+
+
+Set up PostgreSQL DB with:
+
+
+Users, products, cart, wishlist, view log
+
+
+Implement Flask backend routes:
+
+
+/signup, /login, /homepage, /add-to-cart, /add-to-wishlist, /track-view, /search, /profile
+
+
+Create React frontend:
+
+
+Sign up / Login
+
+
+Homepage with:
+
+
+Search bar
+
+
+Product feed
+
+
+Product interaction buttons
+
+
+User Profile section
+
+
+Session logic:
+
+
+Store cart/wishlist/viewed logs per user
+
+
+
+“Please prioritize making the search function on the homepage extremely robust. It should search title, text, and category, and rank results by eco-score. Logged-in users should see search results that also consider their age/gender and past clicks. If there are no exact matches, show fuzzy results. Ensure it’s fast, clean, and fits into the existing UI with product cards."
+
+
+
+FINAL NOTE TO REPLIT TEAM
+Please ensure that:
+The homepage dynamically changes based on user activity.
+
+
+Session is properly maintained using Flask’s session.
+
+
+Search is optimized and fully working on the product dataset.
+
+
+Admin panel should allow dataset upload and trigger the hybrid scoring strategy.
+
+
+Products shown are strictly from the updated PostgreSQL dataset.
+
